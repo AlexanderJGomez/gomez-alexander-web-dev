@@ -15,16 +15,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="website-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                   <span class="glyphicon glyphicon-chevron-left">
                   </span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Edit Website
+                Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="website-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
                 </a>
@@ -37,24 +37,34 @@
 
     <form>
         <div class="form-group">
-            <label for="website-name">Website Name</label>
+            <label for="heading-name">Name</label>
             <input type="text"
                    class="form-control"
-                   id="website-name"
-                   value="Apple"
-                   placeholder="Google">
+                   id="heading-name"
+                   placeholder="Page Name"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="heading-text">Text</label>
+            <input type="text"
+                   id="heading-text"
+                   class="form-control"
+                   placeholder="Text">
+            </input>
         </div>
         <div class="form-group">
-            <label for="website-description">Website Description</label>
-                <textarea rows="4"
-                          id="website-description"
-                          class="form-control"
-                          placeholder="Description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</textarea>
+            <label for="heading-size">Size</label>
+            <input type="text"
+                   id="heading-size"
+                   class="form-control"
+                   placeholder="Size">
+            </input>
         </div>
     </form>
 
     <a class="btn btn-danger  btn-block"
-       href="website-list.html">Delete</a>
+       href="widget-list.view.client.html">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -67,12 +77,6 @@
                 </a>
             </p>
 
-            <p class="navbar-text pull-left">
-                <a href="/assignment/website/website-list.html" class="navbar-link">
-          <span class="glyphicon glyphicon-share-alt">
-          </span>
-                </a>
-            </p>
         </div>
     </div>
 </nav>
