@@ -20,12 +20,52 @@
 
     function WidgetService() {
         var api = {
-            findWidgetsForPageId: findWidgetsForPageId
+            createWidget: createWidget,
+            findWidgetsForPageId: findWidgetsForPageId,
+            findWidgetById: findWidgetById,
+            updateWidget: updateWidget,
+            deleteWidget: deleteWidget
         };
         return api;
 
         function findWidgetsForPageId(pageId) {
             return widgets;
         }
+        
+        function createWidget(pageId, widget) {
+            var newWidget = widget;
+            newWidget._id = pageId;
+            widgets.push(newWidget);
+        }
+        
+        function findWidgetById(wid) {
+            for(var i in wigets) {
+                if(widgets[i]._id === wid) {
+                    return widgets[i];
+                }
+            }
+            return null;
+        }
+        
+        function updateWidget(wid, widget) {
+            for(var i in widgets) {
+                if(widgets[i]._id === wid) {
+                    
+                }
+            }
+        }
+
+        function deleteWidget(wid) {
+            for(var i in widgets) {
+                if(widgets[i]._id === wid) {
+                    widgets.splice(i, i);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        
+        
     }
 })();
