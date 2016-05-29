@@ -21,8 +21,24 @@
         };
         return api;
 
-        function createUser(newUser) {
-            users.push(newUser);
+        function createUser(user) {
+            if(user.password1 && user.password2 && user.username && user.password1 === user.password2) {
+                for (var i in users) {
+                    if (user.username === users[i].username) {
+                        return null
+                    }
+                }
+                var newUser = {
+                    username: user.username,
+                    password: user.password1
+                };
+                newUser._id = new Date().getTime() + "";
+                users.push(newUser);
+                return true;
+            }
+
+            return null;
+
         }
 
         function deleteUser(userId) {
@@ -56,7 +72,7 @@
         }
 
         function findUserByUsername(username) {
-            for(var i in user) {
+            for(var i in users) {
                 if(users[i].username === username) {
                     return users[i];
                 }
