@@ -14,7 +14,9 @@
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "views/user/register.view.client.html"
+                templateUrl: "views/user/register.view.client.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .when("/profile/:id", {
                 templateUrl: "views/user/profile.view.client.html",
@@ -36,9 +38,24 @@
                 controller: "EditWebsiteController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget", {
+            .when("/user/:userId/website/:websiteId/page", {
+                templateUrl:"views/page/page-list.view.client.html",
+                controller: "PageListController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/website/:websiteId/page/new", {
+                templateUrl:"views/page/page-new.view.client.html",
+                controller: "PageNewController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/website/:websiteId/page/:pageId/widget", {
                 templateUrl: "views/widget/widget-list.view.client.html",
                 controller: "WidgetListController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/website/:websiteId/page/:pageId/widget/new", {
+                templateUrl: "views/widget/widget-chooser.view.client.html",
+                controller: "WidgetChooserController",
                 controllerAs: "model"
             })
             .otherwise({
