@@ -30,7 +30,7 @@
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
+            <a ng-click="model.createHeader()">
                 Header
             </a>
         </li>
@@ -60,12 +60,12 @@
             </a>
         </li>
         <li class="list-group-item">
-            <a href="/assignment/widget/widget-image.html">
+            <a ng-click="model.createImage()">
                 Image
             </a>
         </li>
         <li class="list-group-item">
-            <a href="/assignment/widget/widget-youtube.html">
+            <a ng-click="model.createYouTube()">
                 YouTube
             </a>
         </li>
