@@ -13,8 +13,13 @@
         vm.createPage = createPage;
 
         function createPage(page) {
-            PageService.createPage(vm.websiteId, page);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            var result = PageService.createPage(vm.websiteId, page);
+            if(result) {
+                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            }
+            else {
+                vm.error = "Unable to create Page"
+            }
         }
 
 

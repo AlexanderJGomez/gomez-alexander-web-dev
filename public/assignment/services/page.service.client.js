@@ -23,10 +23,16 @@
         return api;
 
         function createPage(websiteId, page) {
-            var newPage = page;
-            newPage.websiteId = websiteId;
-            newPage._id = new Date().getTime() + "";
-            pages.push(newPage);
+            if(page.name) {
+                var newPage = page;
+                newPage.websiteId = websiteId;
+                newPage._id = new Date().getTime() + "";
+                pages.push(newPage);
+                return true;
+            }
+            else {
+                return null;
+            }
         }
 
         function findPagesByWebsiteId(websiteId) {

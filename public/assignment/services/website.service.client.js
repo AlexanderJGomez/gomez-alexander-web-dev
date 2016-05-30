@@ -54,14 +54,19 @@
         }
 
         function createWebsite(developerId, name, desc) {
-            var newWebsite = {
-                _id: (new Date()).getTime()+"",
-                name: name,
-                description: desc,
-                developerId: developerId
-            };
-            websites.push(newWebsite);
-            return newWebsite;
+            if(name) {
+                var newWebsite = {
+                    _id: (new Date()).getTime()+"",
+                    name: name,
+                    description: desc,
+                    developerId: developerId
+                };
+                websites.push(newWebsite);
+                return newWebsite;
+            }
+            else {
+                return null;
+            }
         }
 
         function findWebsitesForUserId(userId) {
