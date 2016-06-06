@@ -12,20 +12,32 @@
         vm.pageId = $routeParams.pageId;
         vm.websiteId  = $routeParams.websiteId;
         vm.widgetId = $routeParams.widgetId;
-        vm.widget = WidgetService.findWidgetById(vm.widgetId);
+
+        function init() {
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .then(
+                    function(response) {
+                        vm.widget = response.data;
+                    }
+                );
+        }
+        init();
+
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
 
 
         function updateWidget(widget) {
-            var result = WidgetService.updateWidget(vm.widgetId, widget);
-            console.log("result is " + result);
-            if(result) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
-            }
-            else {
-                vm.error = "Could not update widget";
-            }
+            var result = WidgetService.updateWidget(vm.widgetId, widget)
+                .then(function(response) {
+                    if (response.data) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
+                    }
+                    else {
+                        vm.error = "Could not update widget";
+                    }
+                });
         }
 
         function deleteWidget() {

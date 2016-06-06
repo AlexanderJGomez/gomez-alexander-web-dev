@@ -12,7 +12,7 @@
         { "_id": "789", "name": "Chess",       "developerId": "234" }
     ];
 
-    function WebsiteService() {
+    function WebsiteService($http) {
         var api = {
             createWebsite: createWebsite,
             findWebsitesForUserId: findWebsitesForUserId,
@@ -23,60 +23,35 @@
         return api;
 
         function deleteWebsite(websiteId) {
-            for(var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    websites.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/website/" + websiteId;
+            return $http.delete(url);
         }
 
         function findWebsiteById(wid) {
-            for(var i in websites) {
-                if(wid === websites[i]._id) {
-                    return websites[i];
-                }
-            }
-            return null;
+            var url = "/api/website/" + wid;
+            return $http.get(url);
         }
 
         function updateWebsite(wid, website) {
-            for(var i in websites) {
-                if(wid === websites[i]._id) {
-                    websites[i].name = website.name;
-                    websites[i].description = website.description;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/website/" + wid;
+            return $http.put(url, website);
 
         }
 
         function createWebsite(developerId, name, desc) {
-            if(name) {
-                var newWebsite = {
-                    _id: (new Date()).getTime()+"",
-                    name: name,
-                    description: desc,
-                    developerId: developerId
-                };
-                websites.push(newWebsite);
-                return newWebsite;
-            }
-            else {
-                return null;
-            }
+            var newWebsite = {
+                _id: (new Date()).getTime()+"",
+                name: name,
+                description: desc,
+                developerId: developerId
+            };
+            var url = "/api/user/"+developerId + "/website";
+            return $http.post(url, newWebsite);
         }
 
         function findWebsitesForUserId(userId) {
-            var resultSet = [];
-            for(var i in websites) {
-                if(websites[i].developerId === userId) {
-                    resultSet.push(websites[i]);
-                }
-            }
-            return resultSet;
+            var url = "/api/user/" + userId + "/website"
+            return $http.get(url);
         }
     }
 })();

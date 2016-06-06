@@ -12,15 +12,15 @@
         vm.register = register;
 
         function register(user) {
-            console.log("inside register");
-            var result = UserService.createUser(user);
-            if(result) {
-                var x = UserService.findUserByUsername(user.username);
-                $location.url("/profile/" + x._id)
-            }
-            else {
-                vm.error = "Error registering."
-            }
+            UserService.createUser(user)
+                .then(function(response, err) {
+                    if(response.data) {
+                        $location.url("/profile/" + response.data._id)
+                    }
+                    else {
+                        vm.error = "Error registering."
+                    }
+                })
         }
     }
 

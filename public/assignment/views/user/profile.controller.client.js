@@ -8,15 +8,28 @@
         vm.updateUser = updateUser;
 
         var id = $routeParams.id;
-
+        var index = -1;
         function init() {
-            vm.user = UserService.findUserById(id);
+            UserService
+                .findUserById(id)
+                .then(function(response) {
+                    vm.user = response.data;
+                });
         }
         init();
 
-        function updateUser(newUser) {
-            UserService.updateUser(id, newUser);
+        function updateUser(user) {
+            UserService
+                .updateUser(vm.user._id, user)
+                .then(function(response, error) {
+                    if(error) {
+                        vm.error = "User not found";
+                    }
+                    else {
+                        vm.success = "User successfully updated";
+                    }
+                });
+
         }
     }
-
 })();

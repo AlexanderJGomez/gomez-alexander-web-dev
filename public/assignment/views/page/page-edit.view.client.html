@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/assignment/css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="page-list.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                   <span class="glyphicon glyphicon-chevron-left">
                   </span>
                 </a>
@@ -24,7 +11,7 @@
                 Edit Page
             </a>
             <p class="navbar-text pull-right">
-                <a href="page-list.view.client.html" class="navbar-link">
+                <a ng-click="model.updatePage(model.page)" class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
                 </a>
@@ -38,7 +25,8 @@
     <form>
         <div class="form-group">
             <label for="page-name">Name</label>
-            <input type="text"
+            <input ng-model="model.page.name"
+                    type="text"
                    class="form-control"
                    id="page-name"
                    placeholder="Page Name"
@@ -48,7 +36,8 @@
 
         <div class="form-group">
             <label for="page-title">Name</label>
-            <input type="text"
+            <input ng-model="model.page.title"
+                    type="text"
                    id="page-title"
                    class="form-control"
                    placeholder="Page Title">
@@ -57,14 +46,14 @@
     </form>
 
     <a class="btn btn-danger  btn-block"
-       href="page-list.view.client.html">Delete</a>
+       ng-click="model.deletePage()">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-footer">
             <p class="navbar-text pull-right">
-                <a href="/assignment/user/profile.html" class="navbar-link">
+                <a href="#/profile/{{model.userId}}" class="navbar-link">
           <span class="glyphicon glyphicon-user">
           </span>
                 </a>
@@ -73,6 +62,3 @@
         </div>
     </div>
 </nav>
-
-</body>
-</html>

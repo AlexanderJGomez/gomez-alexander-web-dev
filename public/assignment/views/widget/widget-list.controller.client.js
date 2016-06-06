@@ -12,7 +12,11 @@
         vm.getSafeUrl = getSafeUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsForPageId(vm.pageId);
+            WidgetService
+                .findWidgetsForPageId(vm.pageId)
+                .then(function (res) {
+                    vm.widgets = res.data;
+                });
         }
         init();
 
@@ -27,5 +31,10 @@
             return $sce.trustAsResourceUrl(url);
 
         }
+
+        $(".widget-container")
+            .sortable({axis: "y"})
+
+
     }
 })();
