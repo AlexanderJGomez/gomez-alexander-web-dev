@@ -12,6 +12,9 @@
         vm.register = register;
 
         function register(user) {
+            if(!(user.password1 && user.password2 && user.username && user.password1 == user.password2) ) {
+                vm.error = "Fill in fields correctly"
+            }
             UserService.createUser(user)
                 .then(function(response, err) {
                     if(response.data) {

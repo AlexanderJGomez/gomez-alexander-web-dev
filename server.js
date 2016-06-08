@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/public'));
 
 require ("./test/app.js")(app);
 
-var assignment = require('./assignment/app.js')
+var assignment = require('./assignment/app.js');
 assignment(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
