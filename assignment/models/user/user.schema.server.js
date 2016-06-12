@@ -14,7 +14,8 @@ module.exports = function() {
             type: Date,
             default: Date.now()
         },
-        dateUpdated: Date
+        phone: Number,
+        websites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Website' }]
     }, {collection: "assignment.user"})
 
     return UserSchema;

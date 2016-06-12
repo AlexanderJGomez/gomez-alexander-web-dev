@@ -14,7 +14,8 @@ module.exports = function() {
         findUserByCredentials: findUserByCredentials,
         findUserById: findUserById,
         deleteUser: deleteUser,
-        updateUser: updateUser
+        updateUser: updateUser,
+        addWebsite: addWebsite
     };
     
     return api;
@@ -35,21 +36,18 @@ module.exports = function() {
         return User.find({username:username, password:password});
     }
     
-    function deleteUser() {
-        
+    function deleteUser(id) {
+        return User.findByIdAndRemove(id);
     }
+
+    function addWebsite(id, websiteId) {
+        return User.findByIdAndUpdate(id, {$push: {"websites": websiteId}},
+            {safe: true, upsert: true, new : true});
+    }
+
     
     function updateUser(id, newUser) {
-        console.log(id + " " + newUser.username);
-        return User.update({_id: id},
-            {$set :
-                {
-                    firstName: newUser.firstName,
-                    lastName: newUser.lastName,
-                    email: newUser.email
-                }
-            }
-        );
+        return User.findByIdAndUpdate(id, newUser);
     }
     
     
