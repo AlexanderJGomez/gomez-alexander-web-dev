@@ -85,8 +85,12 @@ module.exports = function(app, models) {
     function findUserByCredentials(username, password, res) {
         userModel.findUserByCredentials(username, password)
             .then(function(user) {
-                console.log(user);
-                res.json(user);
+                if(user) {
+                    res.json(user);
+                }
+                else {
+                    res.send(null);
+                }
             },
             function(err) {
                 res.status(404).send("Could not find user by credentials")
