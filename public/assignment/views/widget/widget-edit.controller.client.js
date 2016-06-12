@@ -19,6 +19,8 @@
                 .then(
                     function(response) {
                         vm.widget = response.data;
+                        console.log("The widget in widget edit is")
+                        console.log(vm.widget);
                     }
                 );
         }
@@ -29,7 +31,7 @@
 
 
         function updateWidget(widget) {
-            var result = WidgetService.updateWidget(vm.widgetId, widget)
+            WidgetService.updateWidget(vm.widgetId, widget)
                 .then(function(response) {
                     if (response.data) {
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
@@ -41,13 +43,15 @@
         }
 
         function deleteWidget() {
-            var result = WidgetService.deleteWidget(vm.widgetId);
-            if(result) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
-            }
-            else {
-                vm.error = "Could not delete Widget";
-            }
+            WidgetService.deleteWidget(vm.widgetId)
+                .then(function(res) {
+                    if(res.data) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
+                    }
+                    else {
+                        vm.error = 'Could not delete widget';
+                    }
+                })
         }
 
     }

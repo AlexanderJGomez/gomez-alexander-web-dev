@@ -16,30 +16,27 @@
         vm.createImage = createImage;
 
         function createHeader() {
-            var newWidget = {
-                widgetType: "HEADER",
-                _id: (new Date().getTime() + "")
-            }
-            WidgetService.createWidget(vm.pageId, newWidget)
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id)
+            WidgetService.createWidget(vm.pageId, { widgetType: "HEADER" })
+                .then(function(res) {
+                    var widget = res.data;
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id)
+                })
         }
 
         function createYouTube() {
-            var newWidget = {
-                widgetType: "YOUTUBE",
-                _id: (new Date().getTime() + "")
-            }
-            WidgetService.createWidget(vm.pageId, newWidget)
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id)
+            WidgetService.createWidget(vm.pageId, { widgetType: "YOUTUBE"})
+                .then(function(res) {
+                    var widget = res.data;
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id)
+                })
         }
 
         function createImage() {
-            var newWidget = {
-                widgetType: "IMAGE",
-                _id: (new Date().getTime() + "")
-            }
-            WidgetService.createWidget(vm.pageId, newWidget)
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id)
+            WidgetService.createWidget(vm.pageId, { widgetType: "IMAGE" })
+                .then(function(res) {
+                    var widget = res.data;
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id)
+                })
         }
 
     }

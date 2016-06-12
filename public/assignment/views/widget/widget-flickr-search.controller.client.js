@@ -18,8 +18,10 @@
         function selectPhoto(photo) {
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server;
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
+            
             var widget = {
-                url: url
+                url: url,
+                widgetType: "IMAGE"
             }
 
             console.log(widget);
@@ -28,9 +30,14 @@
                 .then(function(response){
                     if(!response)
                         vm.error="Could not select photo";
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId +
-                        "/page/" + vm.pageId + "/widget/" + vm.widgetId);
-                    return;
+                    else {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId +
+                            "/page/" + vm.pageId + "/widget/" + vm.widgetId);
+                        return;
+                    }
+                },
+                function(err) {
+                    res.status(404).send("Error selecting photo");
                 });
         }
 

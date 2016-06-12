@@ -13,9 +13,8 @@
             UserService
                 .findUserByUsernameAndPassword(username, password)
                 .then(function(response) {
-                    console.log(response);
                     var user = response.data;
-                    if(user) {
+                    if(user.length) {
                         var id = user._id;
                         $location.url("/profile/" + id);
                     } else {
