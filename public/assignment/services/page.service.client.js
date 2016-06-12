@@ -6,11 +6,6 @@
         .module("WebAppMaker")
         .factory("PageService", PageService);
 
-    var pages = [
-        { "_id": "321", "name": "Post 1", "websiteId": "456" },
-        { "_id": "432", "name": "Post 2", "websiteId": "456" },
-        { "_id": "543", "name": "Post 3", "websiteId": "456" }
-    ]
 
     function PageService($http) {
         var api = {
@@ -23,9 +18,9 @@
         return api;
 
         function createPage(websiteId, page) {
-            page.websiteId = websiteId;
-            var url = "/api/page";
-            return $http.post("url", page)
+            page._website = websiteId;
+            var url = "/api/website/"+websiteId+"/page";
+            return $http.post(url, page)
         }
 
         function findPagesByWebsiteId(websiteId) {
@@ -45,6 +40,7 @@
         }
 
         function deletePage(pageId){
+            console.log("In delete page");
             var url = "/api/page/" + pageId;
             return $http.delete(url);
         }
