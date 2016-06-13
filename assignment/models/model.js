@@ -3,7 +3,18 @@
  */
 module.exports = function() {
     var mongoose = require('mongoose');
-    mongoose.createConnection("mongodb://localhost/cs4550summer1");
+    //mongoose.createConnection("mongodb://localhost/cs4550summer1");
+    var connectionString = 'mongodb://localhost/cs4550summer1';
+
+    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+        connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+            process.env.OPENSHIFT_APP_NAME;
+    }
+
+    mongoose.createConnection(connectionString);
     
     
     var userModel = require("./user/user.model.server.js")();
