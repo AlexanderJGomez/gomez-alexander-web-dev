@@ -32,6 +32,7 @@ module.exports = function() {
     }
 
     function updatePage(pageId, page) {
+        delete page._id;
         return Page.findByIdAndUpdate(pageId, page);
     }
 

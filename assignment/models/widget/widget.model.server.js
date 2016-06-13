@@ -26,6 +26,7 @@ module.exports = function() {
     }
 
     function updateWidget(widgetId, widget) {
+        delete widget._id;
         return Widget.findByIdAndUpdate(widgetId, widget);
     }
 
