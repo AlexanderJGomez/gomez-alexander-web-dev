@@ -26,8 +26,6 @@ module.exports = function() {
     }
 
     function updateWidget(widgetId, widget) {
-        console.log(widget);
-        console.log(widgetId);
         return Widget.findByIdAndUpdate(widgetId, widget);
     }
 
@@ -38,5 +36,6 @@ module.exports = function() {
     function findAllWidgetsForPage(pageId) {
         return Widget.find({_page: pageId});
     }
+    
 
 };

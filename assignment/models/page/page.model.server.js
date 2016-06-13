@@ -23,7 +23,6 @@ module.exports = function() {
     }
     
     function addWidget(id, widgetId) {
-        console.log("Inside addWidget");
         return Page.findByIdAndUpdate(id, {$push: {"widgets": widgetId}},
             {safe: true, upsert: true, new : true});
     }

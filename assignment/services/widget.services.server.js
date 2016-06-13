@@ -17,20 +17,47 @@ module.exports = function (app, models) {
     app.get ("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.put("/api/page/:pageId/widget", reorderWidget);
 
     function createWidget(req, res) {
+        console.log("Inside server service")
         var newWidget = req.body;
         newWidget._page = req.params.pageId;
+        console.log(newWidget);
+        var newWidgetId;
         widgetModel.createWidget(newWidget)
             .then(function(widget) {
-                pageModel.addWidget(req.params.pageId, widget)
-                    .then(function(page) {
-                        res.json(widget);
-                    })
+                newWidgetId = widget._id;
+                return pageModel.addWidget(req.params.pageId, widget)
+            },
+            function(err) {
+                res.status(404).send("Error creating widget");
+                return;
+            })
+
+
+            .then(function(page) {
+                return widgetModel.findAllWidgetsForPage(page._id);
+            },
+            function(err) {
+                res.status(404).send("Error creating widget");
+            }
+            )
+            
+            .then(function(widgets) {
+                newWidget.order = widgets.length - 1;
+                return widgetModel.updateWidget(newWidgetId, newWidget);
             },
             function(err) {
                 res.status(404).send("Error creating widget");
             })
+
+            .then(function(widget) {
+                res.json(widget);
+            },
+            function(err) {
+                res.status(404).send("Error creating widget");
+            });
     }
     
     function findAllWidgetsForPage(req, res) {
@@ -42,6 +69,57 @@ module.exports = function (app, models) {
             function(err) {
                 res.status(404).send("Error finding widgets")
             })
+    }
+
+    function reorderWidget(req, res) {
+        console.log("In reorder widget and start is " + start + " and end is " + end)
+        var start = parseInt(req.query.start);
+        var end = parseInt(req.query.end);
+        console.log("In reorder widget and start is " + start + " and end is " + end)
+        widgetModel.findAllWidgetsForPage(req.params.pageId)
+            .then(function(widgets) {
+                console.log(widgets);
+                widgets.forEach(function(widget){
+                    console.log("In for each");
+                    if(start < end) {
+                        if(widget.order > start && widget.order <= end) {
+                            console.log("place " + widget.order + " becomes " + (widget.order - 1));
+                            widget.order--;
+                            widgetModel.updateWidget(widget._id, widget)
+                                .then(function(widget) {
+
+                                })
+                        } else if(widget.order === start) {
+                            console.log("place " + widget.order + " becomes " + end);
+                            widget.order = end;
+                            widgetModel.updateWidget(widget._id, widget)
+                                .then(function(widget) {
+
+                                })
+                        }
+                    }
+                    else {
+                        if(widget.order >= end && widget.order < start) {
+                            console.log("place " + widget.order + " becomes " + (widget.order + 1));
+                            widget.order++;
+                            widgetModel.updateWidget(widget._id, widget)
+                                .then(function(widget) {
+                                })
+                        } else if(widget.order === start) {
+                            console.log("place " + widget.order + " becomes " + end);
+                            widget.order = end;
+                            widgetModel.updateWidget(widget._id, widget)
+                                .then(function(widget) {
+                                })
+                        }
+                    }
+                });
+            },
+            function(err) {
+                res.status(400).send("Error reordering widgets");
+            })
+
+        res.send({})
     }
 
     function deleteWidget(req, res) {
@@ -56,7 +134,6 @@ module.exports = function (app, models) {
 
     function updateWidget(req, res) {
         var widget = req.body;
-        console.log(widget);
 
         switch(widget.widgetType) {
             case "HEADER":
@@ -90,13 +167,24 @@ module.exports = function (app, models) {
                 }
                 break;
             case "IMAGE":
-                    console.log("In services");
                     widgetModel.updateWidget(req.params.widgetId, widget)
                     .then(function(widget) {
                         res.json(widget);
                     },
                     function(err) {
                         res.status(404).send("COuld not update widget");
+                    })
+                break;
+            case "HTML":
+                widgetModel.updateWidget(req.params.widgetId, widget)
+                    .then(function (widget) {
+                        res.json(widget);
+                    })
+                break;
+            case "TEXT":
+                widgetModel.updateWidget(req.params.widgetId, widget)
+                    .then(function (widget) {
+                        res.json(widget);
                     })
                 break;
             default:

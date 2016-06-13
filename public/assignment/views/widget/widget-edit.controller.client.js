@@ -31,6 +31,7 @@
 
 
         function updateWidget(widget) {
+            console.log(widget);
             WidgetService.updateWidget(vm.widgetId, widget)
                 .then(function(response) {
                     if (response.data) {

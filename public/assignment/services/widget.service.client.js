@@ -13,7 +13,8 @@
             findWidgetsForPageId: findWidgetsForPageId,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget
+            deleteWidget: deleteWidget,
+            sorted: sorted
         };
         return api;
 
@@ -27,7 +28,15 @@
             var newWidget = widget;
             newWidget.pageId = pageId;
             var url = "/api/page/"+pageId+"/widget";
+            console.log("Inside client service")
             return $http.post(url, newWidget);
+        }
+
+        function sorted(startIndex, endIndex, pageId) {
+            console.log("sorting");
+            console.log(startIndex);
+            console.log(endIndex);
+            return $http.put("/api/page/"+pageId+"/widget?start="+startIndex+"&end="+endIndex);
         }
         
 
@@ -37,7 +46,6 @@
         }
         
         function updateWidget(wid, widget) {
-            console.log("Updating widget in client sevices");
             var url = "/api/widget/" + wid;
             return $http.put(url, widget);
         }
