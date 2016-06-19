@@ -56,6 +56,7 @@ module.exports = function() {
 
     
     function updateUser(id, newUser) {
+        console.log(newUser);
         delete newUser._id;
         return User.findByIdAndUpdate(id, newUser);
     }

@@ -12,7 +12,7 @@ module.exports = function() {
             process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;
-        process.env.FACEBOOK_CALLBACK_URL = "http://webdev-alexandergomez.rhcloud.com:8080/auth/facebook/callback";
+        //process.env.FACEBOOK_CALLBACK_URL = "http://webdev-alexandergomez.rhcloud.com:8080/auth/facebook/callback";
     }
 
     mongoose.createConnection(connectionString);
