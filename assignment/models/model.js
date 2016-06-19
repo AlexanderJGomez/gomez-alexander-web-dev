@@ -14,7 +14,7 @@ module.exports = function() {
             process.env.OPENSHIFT_APP_NAME;
         //process.env.FACEBOOK_CALLBACK_URL = "http://webdev-alexandergomez.rhcloud.com:8080/auth/facebook/callback";
     }
-
+ 
     mongoose.createConnection(connectionString);
     
     
