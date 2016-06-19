@@ -7,6 +7,10 @@
 
         var api = {
             createUser: createUser,
+            checkLoggedIn: checkLoggedIn,
+            logOut: logOut,
+            register: register,
+            login: login,
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findUserById: findUserById,
             updateUser: updateUser,
@@ -18,6 +22,35 @@
             var url = "/api/user/"+id;
             return $http.put(url, newUser);
         }
+
+        function logOut() {
+            return $http.post("/api/logout");
+        }
+
+        function login(username, password) {
+            var user = {
+                username: username,
+                password: password
+            }
+
+            return $http.post("/api/login", user);
+        }
+
+        function checkLoggedIn() {
+            return $http.get("/api/loggedin")
+        }
+        
+        
+        function register(username, password) {
+            console.log("In register")
+            var url = "/api/register";
+            var user = {
+                username: username,
+                password: password
+            }
+            return $http.post(url, user);
+        }
+
         function createUser(user) {
             var url = "/api/user";
             return $http.post(url, user);
@@ -34,6 +67,7 @@
             var url = "/api/user/" + id;
             return $http.get(url);
         }
+
 
     }
 })();

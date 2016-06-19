@@ -14,6 +14,13 @@ module.exports = function() {
             type: Date,
             default: Date.now()
         },
+        facebook: {
+            id: String,
+            displayName: String
+        },
+        // google: {
+        //
+        // },
         phone: Number,
         websites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Website' }]
     }, {collection: "assignment.user"})
