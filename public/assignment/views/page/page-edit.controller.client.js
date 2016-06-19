@@ -24,16 +24,21 @@
 
 
         function updatePage(page) {
-            PageService.updatePage(page._id, page)
-                .then(function(response) {
-                    if(response.data) {
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page")
-                    }
-                    else {
-                        vm.error = "Couldnt update";
-                    }
+            if(!page.name) {
+                vm.error = "Enter a name";
+            }
+            else {
+                PageService.updatePage(page._id, page)
+                    .then(function (response) {
+                        if (response.data) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page")
+                        }
+                        else {
+                            vm.error = "Couldnt update";
+                        }
 
-                })
+                    })
+            }
         }
 
 

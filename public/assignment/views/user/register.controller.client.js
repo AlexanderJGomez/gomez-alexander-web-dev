@@ -6,8 +6,9 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController)
 
-    function RegisterController($routeParams, UserService, $location) {
+    function RegisterController($routeParams, UserService, $location, $rootScope) {
         var vm = this;
+        vm.user = {};
 
         vm.register = register;
 
@@ -16,14 +17,15 @@
                 vm.error = "Fill in fields correctly"
             }
             else {
-                UserService.createUser(user)
-                    .then(function(response, err) {
-                        if(response.data) {
-                            $location.url("/profile/" + response.data._id)
-                        }
-                        else {
-                            vm.error = "Error registering."
-                        }
+                UserService.register(user.username, user.password)
+                    .then(function(response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/profile/" + response.data._id)
+
+                    },
+                    function(err) {
+                        vm.error = err.data;
                     })
             }
         }

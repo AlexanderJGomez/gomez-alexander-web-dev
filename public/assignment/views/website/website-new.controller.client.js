@@ -12,16 +12,21 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite(name, description) {
-            WebsiteService
-                .createWebsite(vm.userId, name, description)
-                .then(function(response) {
-                    var newWebsite = response.data;
-                    if(newWebsite) {
-                        $location.url("/user/"+vm.userId+"/website");
-                    } else {
-                        vm.error = "Unable to create website";
-                    }
-                });
+            if(!name) {
+                vm.error = "Set a name for your website";
+            }
+            else {
+                WebsiteService
+                    .createWebsite(vm.userId, name, description)
+                    .then(function (response) {
+                        var newWebsite = response.data;
+                        if (newWebsite) {
+                            $location.url("/user/" + vm.userId + "/website");
+                        } else {
+                            vm.error = "Unable to create website";
+                        }
+                    });
+            }
         }
     }
 })();

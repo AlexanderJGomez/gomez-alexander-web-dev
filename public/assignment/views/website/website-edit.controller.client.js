@@ -30,12 +30,18 @@
         }
 
         function updateWebsite(wid, website) {
-            var result = WebsiteService.updateWebsite(wid, website);
-            if(result) {
-                $location.url("/user/"+vm.userId+"/website");
+            console.log(website);
+            if(!website.name) {
+                vm.error = "Enter a name"
             }
             else {
-                vm.error = "Unable to update website";
+                var result = WebsiteService.updateWebsite(wid, website);
+                if (result) {
+                    $location.url("/user/" + vm.userId + "/website");
+                }
+                else {
+                    vm.error = "Unable to update website";
+                }
             }
         }
 

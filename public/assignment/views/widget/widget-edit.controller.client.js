@@ -32,15 +32,21 @@
 
         function updateWidget(widget) {
             console.log(widget);
-            WidgetService.updateWidget(vm.widgetId, widget)
-                .then(function(response) {
-                    if (response.data) {
-                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
-                    }
-                    else {
-                        vm.error = "Could not update widget";
-                    }
-                });
+            if(widget.widgetType != "HTML" && widget.widgetType != "TEXT" && !widget.name) {
+                vm.nameError = "Enter a name"
+            }
+            else {
+                vm.nameError = null;
+                WidgetService.updateWidget(vm.widgetId, widget)
+                    .then(function (response) {
+                        if (response.data) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
+                        }
+                        else {
+                            vm.error = "Could not update widget";
+                        }
+                    });
+            }
         }
 
         function deleteWidget() {

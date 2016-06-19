@@ -4,14 +4,34 @@
         {{model.error}}
     </div>
 
+    <!--<div ng-show="myForm.$submitted && myForm.username.$pristine && myForm.password.$pristine" class="ag-alert">-->
+        <!--<span class=" ag-alert alert alert-danger">-->
+                     <!--Fill in all fields-->
+        <!--</span>-->
+    <!--</div>-->
+
     <h1>Login</h1>
-    <input ng-model="username" type="text"
-           class="form-control"
-           placeholder="username"/>
-    <input ng-model="password" type="password"
-           class="form-control"
-           placeholder="password"/>
-    <a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Login</a>
+    <form name="myForm" id="myForm" novalidate>
+        <input ng-model="username"
+               name="username"
+               type="text"
+               class="form-control"
+               placeholder="username" required/>
+        <input ng-model="password"
+               name="password"
+               type="password"
+               class="form-control"
+               placeholder="password" required/>
+    </form>
+
+    <button form="myForm"
+       type="submit"
+       ng-click="model.login(username, password)"
+       class="btn btn-primary btn-block">Login</button>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>
+    <a href="/auth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook"></span>
+        Facebook
+    </a>
 </div>

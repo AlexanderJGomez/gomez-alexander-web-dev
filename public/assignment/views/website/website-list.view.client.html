@@ -14,19 +14,16 @@
     </div>
 </nav>
 
-
-<div class="container">
-    <ul class="list-group">
-        <li ng-repeat="website in model.websites" class="list-group-item">
-            <a href="#/user/{{website._user}}/website/{{website._id}}/page">
-                {{website.name}}
-            </a>
-            <a href="#/user/{{website._user}}/website/{{website._id}}" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-    </ul>
-</div>
+<ul class="list-group">
+    <li ng-repeat="website in model.websites" class="list-group-item">
+        <a href="#/user/{{website._user}}/website/{{website._id}}/page">
+            {{website.name}}
+        </a>
+        <a href="#/user/{{website._user}}/website/{{website._id}}" class="pull-right">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+    </li>
+</ul>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">

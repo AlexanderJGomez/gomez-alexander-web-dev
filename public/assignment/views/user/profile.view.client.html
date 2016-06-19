@@ -5,10 +5,14 @@
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateUser(model.user)" class="navbar-link">
+                <button
+                        form="myForm"
+                        type="submit"
+                        ng-click="model.updateUser(model.user)"
+                        class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
-                </a>
+                </button>
             </p>
         </div>
     </div>
@@ -16,12 +20,20 @@
 
 <div class="container">
 
-    <div class="alert alert-success alert-dismissible" role="alert">
+    <div ng-show="model.success && myForm.$submitted && myForm.email.$valid" class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>Success!</strong> Your profile was saved.
     </div>
 
-    <form>
+    <div ng-show="myForm.$submitted && myForm.$error.email" class="ag-alert">
+        <span class=" ag-alert alert alert-danger">
+                     bad email
+        </span>
+    </div>
+
+
+    <form name="myForm" id="myForm" novalidate>
+
         <div class="form-group">
             <label for="username">Username</label>
             <input ng-model="model.user.username"
@@ -33,22 +45,36 @@
         <div class="form-group">
             <label for="email">Email address</label>
             <input ng-model="model.user.email"
-                   type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+                   type="email"
+                   name="email"
+                   class="form-control"
+                   id="email"
+                   placeholder="alice@wonderland.com">
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+            <input ng-model="model.user.firstName"
+                   type="text" class="form-control"
+                   id="first-name"
+                   placeholder="Alice">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="last-name"
+                   placeholder="Wonderland">
         </div>
     </form>
 
     <a class="btn btn-primary btn-block"
        href="#/user/{{model.user._id}}/website">Websites</a>
     <a class="btn btn-danger  btn-block"
-       href="#/login">Logout</a>
+       ng-click="model.logOut()">Logout</a>
+    <a class = "btn btn-primary btn-block"
+        ng-click="model.unregister()"> Unregister
+    </a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

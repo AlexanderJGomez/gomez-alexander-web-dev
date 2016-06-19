@@ -11,10 +11,10 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                <button form="myForm" type="submit" ng-click="model.updateWidget(model.widget)" class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
-                </a>
+                </button>
             </p>
         </div>
     </div>
@@ -26,7 +26,7 @@
 
 <div class="container">
 
-    <form>
+    <form id="myForm" name="myForm" novalidate>
         <div class="form-group">
             <label for="heading-name">Name</label>
             <input ng-model="model.widget.name"
@@ -34,7 +34,11 @@
                    class="form-control"
                    id="heading-name"
                    placeholder="Page Name"
+                   required
             >
+        </div>
+        <div ng-if="model.nameError" class="alert alert-danger">
+            {{model.nameError}}
         </div>
 
         <div class="form-group">

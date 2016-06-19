@@ -11,14 +11,20 @@
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.websiteId;
         vm.createPage = createPage;
+        vm.page = {};
 
         function createPage(page) {
-            var result = PageService.createPage(vm.websiteId, page);
-            if(result) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            if(!page.name) {
+                vm.error = "Enter a page name";
             }
             else {
-                vm.error = "Unable to create Page"
+                var result = PageService.createPage(vm.websiteId, page);
+                if (result) {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                }
+                else {
+                    vm.error = "Unable to create Page"
+                }
             }
         }
 
